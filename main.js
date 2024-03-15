@@ -66,9 +66,9 @@ submitForm.addEventListener("submit", async (event) => {
 
     if (signup.checked) {
 
-        const result = createNewUser(name, email, password);
+        const result = createNewUser(name.value, email.value, password.value);
 
-        if (result === false) {
+        if (result === true) {
             alert(`User already exists with email "${email.value}`);
         } else {
             alert("Created successfully new user with email " + email.value);
@@ -81,12 +81,13 @@ submitForm.addEventListener("submit", async (event) => {
 
 
 async function validateUserCredential(email, password) {
+    let result;
     userData.forEach(e => {
         if (email == e.email && password == e.password) {
-            return true;
+            result = true;
         }    
     });
-    return false;
+    return result ? result : false;
 }
 
 function createNewUser(name, email, password) {
@@ -97,10 +98,11 @@ function createNewUser(name, email, password) {
 
 
 function userExists(users, user) {
+    let result;
     users.forEach(e => {
         if (e.email === user.email) {
-            return true;
+            result = true;
         }
     });
-    return false;
+    return result ? result : false;
   }
